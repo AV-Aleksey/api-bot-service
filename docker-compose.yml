@@ -1,0 +1,21 @@
+services:
+  bot_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    volumes:
+      - ./src:/usr/src/app/src
+  postgres_db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=bot_db
