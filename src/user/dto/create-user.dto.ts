@@ -1,11 +1,10 @@
 import {
-  IsBoolean,
-  IsEmail,
-  IsEmpty,
-  IsEnum,
   IsInt,
-  IsNotEmpty,
+  IsEmail,
   IsString,
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -14,27 +13,18 @@ export class CreateUserDto {
   payed: boolean;
 
   @IsNotEmpty()
-  @IsEmail(null, { message: 'Please provide valid Email.' })
-  email: string;
-
-  @IsEmpty()
-  @IsString()
-  name: string;
-
-  @IsEmpty()
-  @IsString()
-  stage: string;
-
-  @IsEmpty()
   @IsInt()
-  age: number;
+  chatId: number;
 
-  @IsEmpty()
-  @IsString()
-  time: string;
+  @IsOptional()
+  @IsEmail()
+  email: string | null;
 
-  @IsEmpty()
+  @IsOptional()
   @IsString()
-  @IsEnum(['f', 'm'])
-  gender: string;
+  name: string | null;
+
+  @IsOptional()
+  @IsInt()
+  age: number | null;
 }

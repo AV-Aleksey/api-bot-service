@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 
+import { WebhookHandlerModule } from './webhook-handler/webhook-handler.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -18,6 +20,7 @@ import { UserModule } from './user/user.module';
       autoLoadEntities: true,
       logging: true,
     }),
+    WebhookHandlerModule,
     UserModule,
   ],
   controllers: [AppController],

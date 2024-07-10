@@ -14,13 +14,11 @@ export class UserService {
   create(createUserDto: CreateUserDto) {
     const user: User = new User();
 
-    console.log(createUserDto);
-
     user.email = createUserDto.email;
+    user.chatId = createUserDto.chatId;
     user.payed = createUserDto.payed;
-    // user.name = createUserDto.name;
-    // user.age = createUserDto.age;
-    // user.time = createUserDto.time;
+    user.name = createUserDto.name;
+    user.age = createUserDto.age;
 
     return this.userRepository.save(user);
   }
