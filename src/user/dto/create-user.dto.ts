@@ -12,7 +12,7 @@ export class CreateUserDto {
   @IsBoolean()
   payed: boolean;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsInt()
   chatId: number;
 

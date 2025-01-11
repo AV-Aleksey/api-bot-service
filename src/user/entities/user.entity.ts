@@ -5,7 +5,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', nullable: false, unique: true })
+  @Column({ type: 'int', nullable: false, unique: false })
   chatId: number;
 
   @Column({ type: 'boolean', nullable: false })

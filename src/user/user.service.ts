@@ -5,6 +5,8 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { Like } from 'typeorm';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -27,17 +29,34 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
+  findAll(size: number, page: number, email?: string) {
+    const take = size || 10;
+    const skip = page ? (page - 1) * take : 0; 
+
+    const whereCondition = email ? { email: Like(`%${email}%`) } : {}; 
+
+    return this.userRepository.find({
+      where: whereCondition,
+      skip,
+      take,
+      order: { id: 'ASC' }
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     const user: User = new User();
 
     user.email = updateUserDto.email;
     user.payed = updateUserDto.payed;
-    // user.name = updateUserDto.name;
-    // user.age = updateUserDto.age;
-    // user.time = updateUserDto.time;
+    user.name = updateUserDto.name;
+    user.age = updateUserDto.age;
 
     user.id = id;
 
     return this.userRepository.save(user);
+  }
+
+  delete(id: number) {
+    return this.userRepository.delete(id);
   }
 }
